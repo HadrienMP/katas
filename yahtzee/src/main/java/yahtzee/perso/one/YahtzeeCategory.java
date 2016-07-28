@@ -11,7 +11,9 @@ enum YahtzeeCategory {
     THREE_OF_A_KIND(null, 3),
     FOUR_OF_A_KIND(null, 4),
     YAHTZEE(null, null),
-    CHANCE(null, null);
+    CHANCE(null, null),
+    SMALL_STRAIGHT(null, null),
+    LARGE_STRAIGHT(null, null);
 
     private Integer diceValue;
     private Integer numberOfDices;
