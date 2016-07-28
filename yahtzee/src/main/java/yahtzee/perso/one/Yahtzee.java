@@ -19,21 +19,26 @@ class Yahtzee {
     int score(YahtzeeCategory category) {
         List<Integer> diceResultsDesc = diceResults.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
-        if (category == YahtzeeCategory.PAIR) {
-            for (int i = 1; i < diceResultsDesc.size(); i++) {
-                if (diceResultsDesc.get(i) == diceResultsDesc.get(i-1)) {
-                    return diceResultsDesc.get(i) * 2;
+        if (category == YahtzeeCategory.THREE_OF_A_KIND || category == YahtzeeCategory.PAIR) {
+
+            int numberOfSameDicesToFind = 1;
+            if (category == YahtzeeCategory.PAIR) {
+                numberOfSameDicesToFind = 2;
+            }
+            if (category == YahtzeeCategory.THREE_OF_A_KIND) {
+                numberOfSameDicesToFind = 3;
+            }
+
+            for (int i = numberOfSameDicesToFind - 1; i < diceResultsDesc.size(); i++) {
+                boolean match = true;
+                for (int j = 1; j < numberOfSameDicesToFind; j++) {
+                    match &= diceResultsDesc.get(i) == diceResultsDesc.get(i - j);
+                }
+                if (match) {
+                    return diceResultsDesc.get(i) * numberOfSameDicesToFind;
                 }
             }
-            return category.getNumber();
-        }
-        if (category == YahtzeeCategory.THREE_OF_A_KIND) {
-            for (int i = 2; i < diceResultsDesc.size(); i++) {
-                if (diceResultsDesc.get(i) == diceResultsDesc.get(i-1) && diceResultsDesc.get(i) == diceResultsDesc.get(i-2)) {
-                    return diceResultsDesc.get(i) * 3;
-                }
-            }
-            return category.getNumber();
+            return -1;
         }
 
         return diceResults.stream()
