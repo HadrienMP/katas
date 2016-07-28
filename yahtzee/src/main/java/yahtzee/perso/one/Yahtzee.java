@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static yahtzee.perso.one.YahtzeeCategory.CHANCE;
+import static yahtzee.perso.one.YahtzeeCategory.LARGE_STRAIGHT;
 import static yahtzee.perso.one.YahtzeeCategory.SMALL_STRAIGHT;
 import static yahtzee.perso.one.YahtzeeCategory.YAHTZEE;
 
@@ -48,6 +49,15 @@ class Yahtzee {
             boolean smallStraight = true;
             for (int i = 0; i < diceValues.size(); i++) {
                 smallStraight &= diceValues.get(i) == i+1;
+
+            }
+            return smallStraight ? 15 : 0;
+        }
+
+        if (category == LARGE_STRAIGHT) {
+            boolean smallStraight = true;
+            for (int i = 0; i < diceValues.size(); i++) {
+                smallStraight &= diceValues.get(i) == i+2;
 
             }
             return smallStraight ? 15 : 0;
