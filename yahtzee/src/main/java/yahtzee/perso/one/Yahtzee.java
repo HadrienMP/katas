@@ -17,11 +17,20 @@ class Yahtzee {
     }
 
     int score(YahtzeeCategory category) {
+        List<Integer> diceResultsDesc = diceResults.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+
         if (category == YahtzeeCategory.PAIR) {
-            List<Integer> diceResultsDesc = diceResults.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
             for (int i = 1; i < diceResultsDesc.size(); i++) {
                 if (diceResultsDesc.get(i) == diceResultsDesc.get(i-1)) {
                     return diceResultsDesc.get(i) * 2;
+                }
+            }
+            return category.getNumber();
+        }
+        if (category == YahtzeeCategory.THREE_OF_A_KIND) {
+            for (int i = 2; i < diceResultsDesc.size(); i++) {
+                if (diceResultsDesc.get(i) == diceResultsDesc.get(i-1) && diceResultsDesc.get(i) == diceResultsDesc.get(i-2)) {
+                    return diceResultsDesc.get(i) * 3;
                 }
             }
             return category.getNumber();

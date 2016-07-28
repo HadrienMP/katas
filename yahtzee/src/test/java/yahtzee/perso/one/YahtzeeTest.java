@@ -54,55 +54,44 @@ public class YahtzeeTest {
     }
 
     @Test
-    public void pair_of_ones() {
+    public void three_of_a_kind_of_ones() {
         // GIVEN
-        Yahtzee yahtzee = new Yahtzee(1, 1, 3, 2, 4);
+        Yahtzee yahtzee = new Yahtzee(1, 1, 1, 3, 4);
 
         // WHEN
-        int score = yahtzee.score(YahtzeeCategory.PAIR);
+        int score = yahtzee.score(YahtzeeCategory.THREE_OF_A_KIND);
 
         // THEN
-        assertThat(score).isEqualTo(2);
+        assertThat(score).isEqualTo(3);
     }
 
     @Test
-    public void pair_of_twos() {
+    public void three_of_a_kind_of_twos() {
         // GIVEN
-        Yahtzee yahtzee = new Yahtzee(2, 1, 3, 2, 4);
+        Yahtzee yahtzee = new Yahtzee(2, 2, 2, 3, 4);
 
         // WHEN
-        int score = yahtzee.score(YahtzeeCategory.PAIR);
-
-        // THEN
-        assertThat(score).isEqualTo(4);
-    }
-
-    @Test
-    public void pair_of_threes() {
-        // GIVEN
-        Yahtzee yahtzee = new Yahtzee(2, 1, 3, 3, 4);
-
-        // WHEN
-        int score = yahtzee.score(YahtzeeCategory.PAIR);
+        int score = yahtzee.score(YahtzeeCategory.THREE_OF_A_KIND);
 
         // THEN
         assertThat(score).isEqualTo(6);
     }
 
     @Test
-    public void pair_of_fours() {
+    public void three_of_a_kind_of_threes() {
         // GIVEN
-        Yahtzee yahtzee = new Yahtzee(2, 1, 4, 3, 4);
+        Yahtzee yahtzee = new Yahtzee(4, 3, 3, 3, 4);
 
         // WHEN
-        int score = yahtzee.score(YahtzeeCategory.PAIR);
+        int score = yahtzee.score(YahtzeeCategory.THREE_OF_A_KIND);
 
         // THEN
-        assertThat(score).isEqualTo(8);
+        assertThat(score).isEqualTo(9);
     }
 
 
 
+    // TODO tester quand il y a 1 seul chiffre sur tous les dés (combien de paires ? de trois ?)
     // TODO tester paires quand il y a 3 fois le chiffre (combien de paires ?)
     // TODO tester avec des valeurs <= 0
     // TODO tester avec des valeurs supérieures à 6
