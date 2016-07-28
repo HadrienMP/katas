@@ -29,7 +29,13 @@ public class YahtzeeTest {
                 // Two dices match number category
                 new Object[] { 1, 1, 3, 4, 5, YahtzeeCategory.ONES, 2 },
                 new Object[] { 1, 2, 2, 4, 5, YahtzeeCategory.TWOS, 4 },
-                new Object[] { 1, 2, 3, 3, 5, YahtzeeCategory.THREES, 6 }
+                new Object[] { 1, 2, 3, 3, 5, YahtzeeCategory.THREES, 6 },
+
+                // Pairs
+                new Object[] { 1, 1, 3, 4, 5, YahtzeeCategory.PAIR, 2 },
+                new Object[] { 2, 2, 3, 4, 5, YahtzeeCategory.PAIR, 4 },
+                new Object[] { 1, 3, 3, 4, 5, YahtzeeCategory.PAIR, 6 },
+                new Object[] { 1, 2, 4, 4, 5, YahtzeeCategory.PAIR, 8 }
         );
     }
 
@@ -47,6 +53,57 @@ public class YahtzeeTest {
         assertThat(score).isEqualTo(result);
     }
 
+    @Test
+    public void pair_of_ones() {
+        // GIVEN
+        Yahtzee yahtzee = new Yahtzee(1, 1, 3, 2, 4);
+
+        // WHEN
+        int score = yahtzee.score(YahtzeeCategory.PAIR);
+
+        // THEN
+        assertThat(score).isEqualTo(2);
+    }
+
+    @Test
+    public void pair_of_twos() {
+        // GIVEN
+        Yahtzee yahtzee = new Yahtzee(2, 1, 3, 2, 4);
+
+        // WHEN
+        int score = yahtzee.score(YahtzeeCategory.PAIR);
+
+        // THEN
+        assertThat(score).isEqualTo(4);
+    }
+
+    @Test
+    public void pair_of_threes() {
+        // GIVEN
+        Yahtzee yahtzee = new Yahtzee(2, 1, 3, 3, 4);
+
+        // WHEN
+        int score = yahtzee.score(YahtzeeCategory.PAIR);
+
+        // THEN
+        assertThat(score).isEqualTo(6);
+    }
+
+    @Test
+    public void pair_of_fours() {
+        // GIVEN
+        Yahtzee yahtzee = new Yahtzee(2, 1, 4, 3, 4);
+
+        // WHEN
+        int score = yahtzee.score(YahtzeeCategory.PAIR);
+
+        // THEN
+        assertThat(score).isEqualTo(8);
+    }
+
+
+
+    // TODO tester paires quand il y a 3 fois le chiffre (combien de paires ?)
     // TODO tester avec des valeurs <= 0
     // TODO tester avec des valeurs supérieures à 6
 }

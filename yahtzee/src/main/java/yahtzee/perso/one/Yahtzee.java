@@ -1,7 +1,9 @@
 package yahtzee.perso.one;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class Yahtzee {
     private List<Integer> diceResults = new ArrayList<>();
@@ -15,6 +17,16 @@ class Yahtzee {
     }
 
     int score(YahtzeeCategory category) {
+        if (category == YahtzeeCategory.PAIR) {
+            List<Integer> diceResultsDesc = diceResults.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+            for (int i = 1; i < diceResultsDesc.size(); i++) {
+                if (diceResultsDesc.get(i) == diceResultsDesc.get(i-1)) {
+                    return diceResultsDesc.get(i) * 2;
+                }
+            }
+            return category.getNumber();
+        }
+
         return diceResults.stream()
                 .filter(dice -> dice == category.getNumber())
                 .mapToInt(x -> x)
