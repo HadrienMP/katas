@@ -35,7 +35,30 @@ public class YahtzeeTest {
                 new Object[] { 1, 1, 3, 4, 5, YahtzeeCategory.PAIR, 2 },
                 new Object[] { 2, 2, 3, 4, 5, YahtzeeCategory.PAIR, 4 },
                 new Object[] { 1, 3, 3, 4, 5, YahtzeeCategory.PAIR, 6 },
-                new Object[] { 1, 2, 4, 4, 5, YahtzeeCategory.PAIR, 8 }
+                new Object[] { 1, 2, 4, 4, 5, YahtzeeCategory.PAIR, 8 },
+                new Object[] { 1, 2, 3, 4, 5, YahtzeeCategory.PAIR, 0 },
+
+                // Three of a kind
+                new Object[] { 1, 1, 1, 4, 5, YahtzeeCategory.THREE_OF_A_KIND, 3 },
+                new Object[] { 2, 2, 2, 4, 5, YahtzeeCategory.THREE_OF_A_KIND, 6 },
+                new Object[] { 1, 3, 3, 3, 5, YahtzeeCategory.THREE_OF_A_KIND, 9 },
+                new Object[] { 1, 2, 4, 4, 4, YahtzeeCategory.THREE_OF_A_KIND, 12 },
+                new Object[] { 1, 2, 3, 4, 5, YahtzeeCategory.THREE_OF_A_KIND, 0 },
+
+                // Four of a kind
+                new Object[] { 5, 5, 5, 4, 5, YahtzeeCategory.FOUR_OF_A_KIND, 20 },
+                new Object[] { 1, 1, 1, 4, 1, YahtzeeCategory.FOUR_OF_A_KIND, 4 },
+                new Object[] { 1, 2, 3, 4, 5, YahtzeeCategory.FOUR_OF_A_KIND, 0 },
+
+                // Yahtzee
+                new Object[] { 5, 5, 5, 5, 5, YahtzeeCategory.YAHTZEE, 50 },
+                new Object[] { 1, 5, 5, 5, 5, YahtzeeCategory.YAHTZEE, 0 },
+                new Object[] { 6, 6, 6, 6, 6, YahtzeeCategory.YAHTZEE, 50 },
+
+                // Chance
+                new Object[] { 1, 2, 3, 4, 5, YahtzeeCategory.CHANCE, 15 },
+                new Object[] { 5, 5, 3, 2, 1, YahtzeeCategory.CHANCE, 16 },
+                new Object[] { 3, 3, 3, 3, 3, YahtzeeCategory.CHANCE, 15 }
         );
     }
 
@@ -51,42 +74,6 @@ public class YahtzeeTest {
 
         // THEN
         assertThat(score).isEqualTo(result);
-    }
-
-    @Test
-    public void three_of_a_kind_of_ones() {
-        // GIVEN
-        Yahtzee yahtzee = new Yahtzee(1, 1, 1, 3, 4);
-
-        // WHEN
-        int score = yahtzee.score(YahtzeeCategory.THREE_OF_A_KIND);
-
-        // THEN
-        assertThat(score).isEqualTo(3);
-    }
-
-    @Test
-    public void three_of_a_kind_of_twos() {
-        // GIVEN
-        Yahtzee yahtzee = new Yahtzee(2, 2, 2, 3, 4);
-
-        // WHEN
-        int score = yahtzee.score(YahtzeeCategory.THREE_OF_A_KIND);
-
-        // THEN
-        assertThat(score).isEqualTo(6);
-    }
-
-    @Test
-    public void three_of_a_kind_of_threes() {
-        // GIVEN
-        Yahtzee yahtzee = new Yahtzee(4, 3, 3, 3, 4);
-
-        // WHEN
-        int score = yahtzee.score(YahtzeeCategory.THREE_OF_A_KIND);
-
-        // THEN
-        assertThat(score).isEqualTo(9);
     }
 
 

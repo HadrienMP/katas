@@ -1,9 +1,13 @@
 package yahtzee.perso.one;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static yahtzee.perso.one.YahtzeeCategory.*;
 
 class Yahtzee {
     private List<Integer> diceResults = new ArrayList<>();
@@ -17,33 +21,49 @@ class Yahtzee {
     }
 
     int score(YahtzeeCategory category) {
+
+        if (category == YAHTZEE && isYahtzee()) {
+            return 50;
+        }
+
+        if (category == CHANCE) {
+            return diceResults.stream().mapToInt(x -> x).sum();
+        }
+
         List<Integer> diceResultsDesc = diceResults.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
-        if (category == YahtzeeCategory.THREE_OF_A_KIND || category == YahtzeeCategory.PAIR) {
+        if (Arrays.asList(PAIR, THREE_OF_A_KIND, FOUR_OF_A_KIND).contains(category)) {
 
-            int numberOfSameDicesToFind = 1;
-            if (category == YahtzeeCategory.PAIR) {
+            int numberOfSameDicesToFind = 0;
+            if (category == PAIR) {
                 numberOfSameDicesToFind = 2;
             }
-            if (category == YahtzeeCategory.THREE_OF_A_KIND) {
+            if (category == THREE_OF_A_KIND) {
                 numberOfSameDicesToFind = 3;
+            }
+            if (category == FOUR_OF_A_KIND) {
+                numberOfSameDicesToFind = 4;
             }
 
             for (int i = numberOfSameDicesToFind - 1; i < diceResultsDesc.size(); i++) {
-                boolean match = true;
+                boolean sameNumbers = true;
                 for (int j = 1; j < numberOfSameDicesToFind; j++) {
-                    match &= diceResultsDesc.get(i) == diceResultsDesc.get(i - j);
+                    sameNumbers &= diceResultsDesc.get(i) == diceResultsDesc.get(i - j);
                 }
-                if (match) {
+                if (sameNumbers) {
                     return diceResultsDesc.get(i) * numberOfSameDicesToFind;
                 }
             }
-            return -1;
+            return 0;
         }
 
         return diceResults.stream()
                 .filter(dice -> dice == category.getNumber())
                 .mapToInt(x -> x)
                 .sum();
+    }
+
+    private boolean isYahtzee() {
+        return new HashSet<>(diceResults).size() == 1;
     }
 }
