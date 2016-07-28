@@ -8,8 +8,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static yahtzee.perso.one.YahtzeeCategory.CHANCE;
-import static yahtzee.perso.one.YahtzeeCategory.LARGE_STRAIGHT;
-import static yahtzee.perso.one.YahtzeeCategory.SMALL_STRAIGHT;
 import static yahtzee.perso.one.YahtzeeCategory.YAHTZEE;
 
 class Yahtzee {
@@ -45,35 +43,30 @@ class Yahtzee {
             }
         }
 
-        if (category == SMALL_STRAIGHT) {
-            boolean smallStraight = true;
-            for (int i = 0; i < diceValues.size(); i++) {
-                smallStraight &= diceValues.get(i) == i+1;
+        if (isScoreSumOfDices(category)) {
 
-            }
-            return smallStraight ? 15 : 0;
-        }
+            Predicate<Integer> diceFilter = dice -> true;
 
-        if (category == LARGE_STRAIGHT) {
-            boolean smallStraight = true;
-            for (int i = 0; i < diceValues.size(); i++) {
-                smallStraight &= diceValues.get(i) == i+2;
-
-            }
-            return smallStraight ? 15 : 0;
-        }
-
-        if (category == CHANCE || category.isSingleNumber()) {
-
-            Predicate<Integer> dicesToConsider = dice -> true;
             if (category.isSingleNumber()) {
-                dicesToConsider = dice -> dice == category.getDiceValue();
+                diceFilter = dice -> dice == category.getDiceValue();
             }
 
-            return diceValues.stream().filter(dicesToConsider).mapToInt(x -> x).sum();
+            return diceValues.stream().filter(diceFilter).mapToInt(x -> x).sum();
         }
 
         return 0;
+    }
+
+    private boolean isScoreSumOfDices(YahtzeeCategory category) {
+
+        boolean straight = category.isStraight();
+        if (straight) {
+            for (int i = 0; i < diceValues.size(); i++) {
+                straight &= diceValues.get(i) == i + category.getFirstNumberOfStraight();
+            }
+        }
+
+        return category == CHANCE || category.isSingleNumber() || straight;
     }
 
     private boolean isYahtzee() {

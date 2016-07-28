@@ -62,13 +62,14 @@ public class YahtzeeTest {
 
                 // Small Straight
                 new Object[] { 1, 2, 3, 4, 5, YahtzeeCategory.SMALL_STRAIGHT, 15 },
-                new Object[] { 3, 3, 3, 3, 3, YahtzeeCategory.SMALL_STRAIGHT, 0 },
                 new Object[] { 5, 4, 3, 2, 1, YahtzeeCategory.SMALL_STRAIGHT, 15 },
+                new Object[] { 3, 3, 3, 3, 3, YahtzeeCategory.SMALL_STRAIGHT, 0 },
 
                 // Large Straight
-                new Object[] { 2, 3, 4, 5, 6, YahtzeeCategory.LARGE_STRAIGHT, 15 }
-//                new Object[] { 3, 3, 3, 3, 3, YahtzeeCategory.LARGE_STRAIGHT, 0 },
-//                new Object[] { 5, 4, 3, 2, 1, YahtzeeCategory.LARGE_STRAIGHT, 15 }
+                new Object[] { 2, 3, 4, 5, 6, YahtzeeCategory.LARGE_STRAIGHT, 20 },
+                new Object[] { 6, 5, 4, 3, 2, YahtzeeCategory.LARGE_STRAIGHT, 20 },
+                new Object[] { 1, 2, 3, 4, 5, YahtzeeCategory.LARGE_STRAIGHT, 0 },
+                new Object[] { 3, 3, 3, 3, 3, YahtzeeCategory.LARGE_STRAIGHT, 0 }
         );
     }
 
