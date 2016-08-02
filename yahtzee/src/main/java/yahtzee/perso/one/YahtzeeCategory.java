@@ -26,7 +26,7 @@ enum YahtzeeCategory {
         this.firstNumberOfStraight = firstNumberOfStraight;
     }
 
-    boolean isMultipleDice() {
+    boolean isMultipleOfAKind() {
         return this.getNumberOfDices() != null;
     }
 
