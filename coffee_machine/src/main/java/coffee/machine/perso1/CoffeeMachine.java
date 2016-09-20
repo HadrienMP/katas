@@ -1,6 +1,6 @@
-package perso1;
+package coffee.machine.perso1;
 
-import perso1.domain.BeverageOrder;
+import coffee.machine.perso1.domain.BeverageOrder;
 
 class CoffeeMachine {
 

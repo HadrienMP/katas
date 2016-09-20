@@ -1,12 +1,12 @@
-package perso1;
+package coffee.machine.perso1;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import perso1.domain.BeverageOrder;
-import perso1.domain.BeverageOrderBuilder;
+import coffee.machine.perso1.domain.BeverageOrder;
+import coffee.machine.perso1.domain.BeverageOrderBuilder;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.matches;

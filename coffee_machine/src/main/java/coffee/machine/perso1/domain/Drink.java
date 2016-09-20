@@ -1,4 +1,4 @@
-package perso1.domain;
+package coffee.machine.perso1.domain;
 
 enum Drink {
     COFFEE      ("C", new Money("0.6")),

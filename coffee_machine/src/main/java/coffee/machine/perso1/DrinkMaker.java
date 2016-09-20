@@ -1,4 +1,4 @@
-package perso1;
+package coffee.machine.perso1;
 
 @FunctionalInterface
 interface DrinkMaker {

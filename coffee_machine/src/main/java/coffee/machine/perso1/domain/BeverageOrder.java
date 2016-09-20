@@ -1,4 +1,4 @@
-package perso1.domain;
+package coffee.machine.perso1.domain;
 
 public class BeverageOrder {
     private static final String NEEDS_STICK_COMMAND = "0";
