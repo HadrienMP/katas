@@ -1,18 +1,18 @@
 package coffee.machine.perso1.domain;
 
 enum Drink {
-    COFFEE      ("C", new Money("0.6")),
-    ORANGE_JUICE("O", new Money("0.6")),
-    TEA         ("T", new Money("0.4")),
-    CHOCOLATE   ("H", new Money("0.5"));
+    COFFEE      ("C", "0.6"),
+    ORANGE_JUICE("O", "0.6"),
+    TEA         ("T", "0.4"),
+    CHOCOLATE   ("H", "0.5");
 
     private final String drinkMakerCommand;
     private Money price;
 
-    Drink(String drinkMakerCommand, Money priceInCents) {
+    Drink(String drinkMakerCommand, String priceInEuros) {
 
         this.drinkMakerCommand = drinkMakerCommand;
-        this.price = priceInCents;
+        this.price = new Money(priceInEuros);
     }
 
     static Drink from(String drinkName) {
