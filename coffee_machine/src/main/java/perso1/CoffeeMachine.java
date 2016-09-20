@@ -1,6 +1,8 @@
 package perso1;
 
-public class CoffeeMachine {
+import perso1.domain.BeverageOrder;
+
+class CoffeeMachine {
 
     private DrinkMaker drinkMaker;
 
@@ -8,7 +10,7 @@ public class CoffeeMachine {
         this.drinkMaker = drinkMaker;
     }
 
-    public void prepare(BeverageOrder beverageOrder) {
+    void prepare(BeverageOrder beverageOrder) {
         if (beverageOrder.wasEnoughMoneyInserted()) {
             drinkMaker.execute(beverageOrder.toDrinkMakerCommand());
         } else {

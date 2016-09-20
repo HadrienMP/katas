@@ -1,10 +1,16 @@
-package perso1;
+package perso1.domain;
 
 import java.math.BigDecimal;
 
 class Money {
 
+    static final Money NO_MONEY = new Money(0);
+
     private int inCents;
+
+    private Money(int inCents) {
+        this.inCents = inCents;
+    }
 
     Money(String inEuros) {
         this.inCents = toCents(inEuros);
@@ -12,10 +18,6 @@ class Money {
 
     private int toCents(String inEuros) {
         return new BigDecimal(inEuros).multiply(new BigDecimal(100)).intValue();
-    }
-
-    private Money(int inCents) {
-        this.inCents = inCents;
     }
 
     boolean isLessOrEqualTo(Money cents) {
@@ -36,6 +38,6 @@ class Money {
     }
 
     private boolean isOneDigitNumber(String result) {
-        return result.length() - (result.indexOf(".") + 1) == 1;
+        return result.length() - (result.indexOf('.') + 1) == 1;
     }
 }

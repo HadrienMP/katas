@@ -1,5 +1,6 @@
 package perso1;
 
-public interface DrinkMaker {
+@FunctionalInterface
+interface DrinkMaker {
     void execute(String s);
 }

@@ -1,8 +1,6 @@
-package perso1;
+package perso1.domain;
 
-import static perso1.Drink.*;
-
-class BeverageOrder {
+public class BeverageOrder {
     private static final String NEEDS_STICK_COMMAND = "0";
     private static final String DRINK_MAKER_ARGUMENT_SEPARATOR = ":";
     private static final String EXTRA_HOT_COMMAND = "h";
@@ -12,15 +10,14 @@ class BeverageOrder {
     private final Money moneyInserted;
     private boolean extraHot;
 
-    BeverageOrder(String drinkName, String numberOfSugars, String moneyInserted, boolean extraHot) {
-
-        this.drink = from(drinkName);
-        this.numberOfSugars = Integer.valueOf(numberOfSugars);
-        this.moneyInserted = new Money(moneyInserted);
+    BeverageOrder(Drink drink, int numberOfSugars, Money moneyInserted, boolean extraHot) {
+        this.drink = drink;
+        this.numberOfSugars = numberOfSugars;
+        this.moneyInserted = moneyInserted;
         this.extraHot = extraHot;
     }
 
-    String toDrinkMakerCommand() {
+    public String toDrinkMakerCommand() {
         String drinkCommand = this.getDrinkCommand();
         String extraHotCommand = getExtraHotCommand();
         String sugarCommand = this.getSugarCommand();
@@ -48,11 +45,11 @@ class BeverageOrder {
         return numberOfSugars != 0;
     }
 
-    boolean wasEnoughMoneyInserted() {
+    public boolean wasEnoughMoneyInserted() {
         return drink.isEnoughMoney(moneyInserted);
     }
 
-    String getMissingMoney() {
+    public String getMissingMoney() {
         return drink.getMoneyDifference(moneyInserted).toString();
     }
 }

@@ -1,6 +1,6 @@
-package perso1;
+package perso1.domain;
 
-public enum Drink {
+enum Drink {
     COFFEE      ("C", new Money("0.6")),
     ORANGE_JUICE("O", new Money("0.6")),
     TEA         ("T", new Money("0.4")),
@@ -15,19 +15,19 @@ public enum Drink {
         this.price = priceInCents;
     }
 
-    public static Drink from(String drinkName) {
+    static Drink from(String drinkName) {
         return Drink.valueOf(drinkName.toUpperCase().replaceAll(" ", "_"));
     }
 
-    public String getDrinkMakerCommand() {
+    String getDrinkMakerCommand() {
         return drinkMakerCommand;
     }
 
-    public boolean isEnoughMoney(Money cents) {
+    boolean isEnoughMoney(Money cents) {
         return price.isLessOrEqualTo(cents);
     }
 
-    public Money getMoneyDifference(Money moneyInserted) {
+    Money getMoneyDifference(Money moneyInserted) {
         return price.difference(moneyInserted);
     }
 }

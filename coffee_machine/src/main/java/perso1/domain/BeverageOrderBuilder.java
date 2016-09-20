@@ -1,28 +1,24 @@
-package perso1;
+package perso1.domain;
 
 public class BeverageOrderBuilder {
-    private String drinkName;
-    private String numberOfSugars;
-    private String moneyInserted;
+
+    private Drink drink;
+    private int numberOfSugars = 0;
+    private Money moneyInserted = Money.NO_MONEY;
     private boolean extraHot;
 
     public BeverageOrderBuilder withDrinkName(String drinkName) {
-        this.drinkName = drinkName;
+        this.drink = Drink.from(drinkName);
         return this;
     }
 
     public BeverageOrderBuilder withNumberOfSugars(String numberOfSugars) {
-        this.numberOfSugars = numberOfSugars;
+        this.numberOfSugars = Integer.valueOf(numberOfSugars);
         return this;
     }
 
     public BeverageOrderBuilder withMoneyInserted(String moneyInserted) {
-        this.moneyInserted = moneyInserted;
-        return this;
-    }
-
-    public BeverageOrderBuilder withExtraHot(boolean extraHot) {
-        this.extraHot = extraHot;
+        this.moneyInserted = new Money(moneyInserted);
         return this;
     }
 
@@ -32,6 +28,6 @@ public class BeverageOrderBuilder {
     }
 
     public BeverageOrder build() {
-        return new BeverageOrder(drinkName, numberOfSugars, moneyInserted, extraHot);
+        return new BeverageOrder(drink, numberOfSugars, moneyInserted, extraHot);
     }
 }

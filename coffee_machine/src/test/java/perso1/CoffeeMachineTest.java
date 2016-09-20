@@ -5,6 +5,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import perso1.domain.BeverageOrder;
+import perso1.domain.BeverageOrderBuilder;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.matches;
@@ -80,7 +82,6 @@ public class CoffeeMachineTest {
         // GIVEN
         BeverageOrder beverageOrder = new BeverageOrderBuilder()
                 .withDrinkName("Tea")
-                .withNumberOfSugars("0")
                 .withMoneyInserted("0.4")
                 .build();
         // WHEN
@@ -94,7 +95,6 @@ public class CoffeeMachineTest {
         // GIVEN
         BeverageOrder beverageOrder = new BeverageOrderBuilder()
                 .withDrinkName("Tea")
-                .withNumberOfSugars("0")
                 .withMoneyInserted("0.39")
                 .build();
         // WHEN
@@ -109,7 +109,6 @@ public class CoffeeMachineTest {
         // GIVEN
         BeverageOrder beverageOrder = new BeverageOrderBuilder()
                 .withDrinkName("Coffee")
-                .withNumberOfSugars("0")
                 .withMoneyInserted("0.20")
                 .build();
         // WHEN
@@ -124,7 +123,6 @@ public class CoffeeMachineTest {
         // GIVEN
         BeverageOrder beverageOrder = new BeverageOrderBuilder()
                 .withDrinkName("Chocolate")
-                .withNumberOfSugars("0")
                 .withMoneyInserted("0.10")
                 .build();
         // WHEN
@@ -139,7 +137,6 @@ public class CoffeeMachineTest {
         // GIVEN
         BeverageOrder beverageOrder = new BeverageOrderBuilder()
                 .withDrinkName("Tea")
-                .withNumberOfSugars("0")
                 .withMoneyInserted("0.41")
                 .build();
         // WHEN
@@ -153,7 +150,6 @@ public class CoffeeMachineTest {
         // GIVEN
         BeverageOrder beverageOrder = new BeverageOrderBuilder()
                 .withDrinkName("Orange juice")
-                .withNumberOfSugars("0")
                 .withMoneyInserted("0.6")
                 .build();
         // WHEN
@@ -167,7 +163,6 @@ public class CoffeeMachineTest {
         // GIVEN
         BeverageOrder beverageOrder = new BeverageOrderBuilder()
                 .withDrinkName("Orange juice")
-                .withNumberOfSugars("0")
                 .withMoneyInserted("0.59")
                 .build();
         // WHEN
@@ -182,7 +177,6 @@ public class CoffeeMachineTest {
         // GIVEN
         BeverageOrder beverageOrder = new BeverageOrderBuilder()
                 .withDrinkName("Tea")
-                .withNumberOfSugars("0")
                 .withMoneyInserted("0.60")
                 .extraHot()
                 .build();
