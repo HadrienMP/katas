@@ -22,7 +22,11 @@ public class CoffeeMachineTest {
     @Test
     public void tea_with_one_sugar_and_a_stick() throws Exception {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Tea", "1", "0.4");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Tea")
+                .withNumberOfSugars("1")
+                .withMoneyInserted("0.4")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -32,7 +36,11 @@ public class CoffeeMachineTest {
     @Test
     public void coffee_with_one_sugar_and_a_stick() throws Exception {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Coffee", "1", "0.6");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Coffee")
+                .withNumberOfSugars("1")
+                .withMoneyInserted("0.6")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -42,7 +50,11 @@ public class CoffeeMachineTest {
     @Test
     public void chocolate_with_one_sugar_and_a_stick() throws Exception {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Chocolate", "1", "0.5");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Chocolate")
+                .withNumberOfSugars("1")
+                .withMoneyInserted("0.5")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -52,7 +64,11 @@ public class CoffeeMachineTest {
     @Test
     public void tea_with_two_sugar_and_a_stick() throws Exception {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Tea", "2", "0.4");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Tea")
+                .withNumberOfSugars("2")
+                .withMoneyInserted("0.4")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -62,7 +78,11 @@ public class CoffeeMachineTest {
     @Test
     public void tea_without_sugar_and_stick() throws Exception {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Tea", "0", "0.4");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Tea")
+                .withNumberOfSugars("0")
+                .withMoneyInserted("0.4")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -72,7 +92,11 @@ public class CoffeeMachineTest {
     @Test
     public void should_send_error_message_to_drink_maker_when_not_enough_money_was_inserted_for_tea() {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Tea", "0", "0.39");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Tea")
+                .withNumberOfSugars("0")
+                .withMoneyInserted("0.39")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -83,7 +107,11 @@ public class CoffeeMachineTest {
     @Test
     public void should_send_error_message_to_drink_maker_when_not_enough_money_was_inserted_for_coffee() {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Coffee", "0", "0.20");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Coffee")
+                .withNumberOfSugars("0")
+                .withMoneyInserted("0.20")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -94,7 +122,11 @@ public class CoffeeMachineTest {
     @Test
     public void should_send_error_message_to_drink_maker_when_not_enough_money_was_inserted_for_chocolate() {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Chocolate", "0", "0.10");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Chocolate")
+                .withNumberOfSugars("0")
+                .withMoneyInserted("0.10")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -105,7 +137,11 @@ public class CoffeeMachineTest {
     @Test
     public void should_make_the_beverage_when_too_much_money_was_inserted() {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Tea", "0", "0.41");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Tea")
+                .withNumberOfSugars("0")
+                .withMoneyInserted("0.41")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -115,7 +151,11 @@ public class CoffeeMachineTest {
     @Test
     public void orange_juice() throws Exception {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Orange juice", "0", "0.6");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Orange juice")
+                .withNumberOfSugars("0")
+                .withMoneyInserted("0.6")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
@@ -125,11 +165,45 @@ public class CoffeeMachineTest {
     @Test
     public void should_send_error_message_to_drink_maker_when_not_enough_money_was_inserted_for_orange_juice() throws Exception {
         // GIVEN
-        BeverageOrder beverageOrder = new BeverageOrder("Orange juice", "0", "0.59");
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Orange juice")
+                .withNumberOfSugars("0")
+                .withMoneyInserted("0.59")
+                .build();
         // WHEN
         coffeeMachine.prepare(beverageOrder);
         // THEN
         verify(drinkMaker, times(1)).execute(any());
         verify(drinkMaker).execute(matches("M:0.01"));
+    }
+
+    @Test
+    public void extra_hot_tea() {
+        // GIVEN
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Tea")
+                .withNumberOfSugars("0")
+                .withMoneyInserted("0.60")
+                .extraHot()
+                .build();
+        // WHEN
+        coffeeMachine.prepare(beverageOrder);
+        // THEN
+        verify(drinkMaker).execute("Th::");
+    }
+
+    @Test
+    public void extra_hot_coffee_with_two_sugars_and_a_stick() {
+        // GIVEN
+        BeverageOrder beverageOrder = new BeverageOrderBuilder()
+                .withDrinkName("Coffee")
+                .withNumberOfSugars("2")
+                .withMoneyInserted("0.60")
+                .extraHot()
+                .build();
+        // WHEN
+        coffeeMachine.prepare(beverageOrder);
+        // THEN
+        verify(drinkMaker).execute("Ch:2:0");
     }
 }
