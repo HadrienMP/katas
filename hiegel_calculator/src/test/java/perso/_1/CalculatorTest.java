@@ -28,4 +28,14 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(3);
     }
 
+    @Test
+    public void _2_and_1_equals_3() {
+        String operations = "2+1";
+        Calculator calculator = new Calculator();
+
+        int result = calculator.compute(operations);
+
+        assertThat(result).isEqualTo(3);
+    }
+
 }
