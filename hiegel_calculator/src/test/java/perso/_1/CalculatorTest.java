@@ -48,4 +48,14 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(19);
     }
 
+    @Test
+    public void _18_and_5454_equals_5472() {
+        String operations = "18+5454";
+        Calculator calculator = new Calculator();
+
+        int result = calculator.compute(operations);
+
+        assertThat(result).isEqualTo(5472);
+    }
+
 }

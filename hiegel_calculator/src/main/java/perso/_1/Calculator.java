@@ -2,8 +2,9 @@ package perso._1;
 
 class Calculator {
     int compute(String operations) {
-        int firstOperand = Character.getNumericValue(operations.charAt(0));
-        int secondOperand = Character.getNumericValue(operations.charAt(2));
-        return firstOperand + secondOperand;
+        int plus = operations.indexOf('+');
+        String firstOperand = operations.substring(0, plus);
+        String secondOperand = operations.substring(plus + 1);
+        return Integer.parseInt(firstOperand) + Integer.parseInt(secondOperand);
     }
 }
