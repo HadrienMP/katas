@@ -38,4 +38,14 @@ public class CalculatorTest {
         assertThat(result).isEqualTo(3);
     }
 
+    @Test
+    public void _18_and_1_equals_19() {
+        String operations = "18+1";
+        Calculator calculator = new Calculator();
+
+        int result = calculator.compute(operations);
+
+        assertThat(result).isEqualTo(19);
+    }
+
 }
