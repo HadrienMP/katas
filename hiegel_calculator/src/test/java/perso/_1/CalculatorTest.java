@@ -1,119 +1,44 @@
 package perso._1;
 
-import org.junit.Ignore;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
-
-import java.util.concurrent.CountedCompleter;
+import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(JUnitParamsRunner.class)
 public class CalculatorTest {
 
-    @Test
-    public void _1_and_1_equals_2() {
-        String operations = "1+1";
-        Calculator calculator = new Calculator();
-
-        int result = calculator.compute(operations);
-
-        assertThat(result).isEqualTo(2);
-    }
+    private Calculator calculator = new Calculator();
 
     @Test
-    public void _1_and_2_equals_3() {
-        String operations = "1+2";
-        Calculator calculator = new Calculator();
-
+    @Parameters({
+            "1+2, 3",
+            "2+1, 3",
+            "18+5454, 5472",
+            "1+-2, -1",
+            "-2+1, -1",
+            Integer.MAX_VALUE + "+0, " + Integer.MAX_VALUE,
+            "0+" + Integer.MAX_VALUE + ", " + Integer.MAX_VALUE,
+            Integer.MIN_VALUE + "+0, " + Integer.MIN_VALUE,
+            "0+" + Integer.MIN_VALUE + ", " + Integer.MIN_VALUE,
+    })
+    public void should_be_able_to_add_2_numbers(String operations, int expectedResult) {
         int result = calculator.compute(operations);
-
-        assertThat(result).isEqualTo(3);
+        assertThat(result).isEqualTo(expectedResult);
     }
 
-    @Test
-    public void _2_and_1_equals_3() {
-        String operations = "2+1";
-        Calculator calculator = new Calculator();
-
-        int result = calculator.compute(operations);
-
-        assertThat(result).isEqualTo(3);
-    }
-
-    @Test
-    public void _18_and_1_equals_19() {
-        String operations = "18+1";
-        Calculator calculator = new Calculator();
-
-        int result = calculator.compute(operations);
-
-        assertThat(result).isEqualTo(19);
-    }
-
-    @Test
-    public void _18_and_5454_equals_5472() {
-        String operations = "18+5454";
-        Calculator calculator = new Calculator();
-
-        int result = calculator.compute(operations);
-
-        assertThat(result).isEqualTo(5472);
-    }
-
-    @Test
-    public void negative_numbers() {
-        String operations = "18+-5454";
-        Calculator calculator = new Calculator();
-
-        int result = calculator.compute(operations);
-
-        assertThat(result).isEqualTo(-5436);
-    }
-
-    @Test(expected = TooBigForTheCalculatorException.class)
-    public void max_int_first_operand() {
-        String operations = Integer.MAX_VALUE + "+1";
-        Calculator calculator = new Calculator();
-
-        calculator.compute(operations);
-    }
-
-    @Test(expected = TooBigForTheCalculatorException.class)
-    public void max_int_second_operand() {
-        String operations = "1+" + Integer.MAX_VALUE;
-        Calculator calculator = new Calculator();
-
-        calculator.compute(operations);
-    }
-
-    @Test(expected = TooBigForTheCalculatorException.class)
-    public void max_int_simple() {
-        String operations = Integer.MAX_VALUE - 1 + "+2";
-        Calculator calculator = new Calculator();
-
-        calculator.compute(operations);
-    }
-
-    @Test(expected = TooBigForTheCalculatorException.class)
-    public void max_int_simple_other_operand() {
-        String operations = "2+" + (Integer.MAX_VALUE - 1);
-        Calculator calculator = new Calculator();
-
-        calculator.compute(operations);
-    }
-
-    @Test(expected = TooBigForTheCalculatorException.class)
-    public void max_int() {
-        String operations = (Integer.MAX_VALUE -2) + "+" + (Integer.MAX_VALUE - 1);
-        Calculator calculator = new Calculator();
-
-        calculator.compute(operations);
-    }
-
-    @Test(expected = TooBigForTheCalculatorException.class)
-    public void max_int_hard() {
-        String operations = (Integer.MIN_VALUE + 2) + "+" + (Integer.MAX_VALUE - 1);
-        Calculator calculator = new Calculator();
-
+    @Test(expected = IntegerOverflowException.class)
+    @Parameters({
+            // Both positive
+            Integer.MAX_VALUE + "+1",
+            "1+" + Integer.MAX_VALUE,
+            // Both negative
+            Integer.MIN_VALUE + "+-1",
+            "-1+" + Integer.MIN_VALUE,
+    })
+    public void should_not_be_able_to_add_numbers_when_result_rolls_over_the_integer_max_values(String operations) {
         calculator.compute(operations);
     }
 
