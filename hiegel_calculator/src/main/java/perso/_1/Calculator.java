@@ -20,13 +20,8 @@ class Calculator {
             return toAdd.get(0);
         }
 
-        if (areAddable(toAdd)) {
-            return toAdd.get(0) +  toAdd.get(1);
-        }
-
-        throw new IntegerOverflowException();
-
-    }
+        return toAdd.stream().reduce(0, this::add);
+}
 
     private List<Integer> getNumbersToAdd(String operations) {
         return Arrays.stream(operations.split("\\+"))
@@ -39,22 +34,23 @@ class Calculator {
         return s.matches("-?\\d+");
     }
 
+    private int add(Integer first, Integer second) {
+        if (areAddable(first, second)) {
+            return first + second;
+        }
 
-    private boolean areAddable(List<Integer> values) {
-        if (areAllPositive(values)) {
-            return Integer.MAX_VALUE - values.get(0) > values.get(1);
-        } else if (areAllNegative(values)) {
-            return Integer.MIN_VALUE - values.get(0) < values.get(1);
+        throw new IntegerOverflowException();
+    }
+
+
+    private boolean areAddable(Integer first, Integer second) {
+        if (first > 0 && second > 0) {
+            return Integer.MAX_VALUE - first > second;
+        } else if (first < 0 && second < 0) {
+            return Integer.MIN_VALUE - first < second;
         } else {
             return true;
         }
     }
 
-    private boolean areAllPositive(List<Integer> values) {
-        return values.get(0) > 0 && values.get(1) > 0;
-    }
-
-    private boolean areAllNegative(List<Integer> values) {
-        return values.get(0) < 0 && values.get(1) < 0;
-    }
 }
