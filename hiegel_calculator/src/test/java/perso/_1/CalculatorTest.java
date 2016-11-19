@@ -5,6 +5,8 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Objects;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
@@ -42,4 +44,14 @@ public class CalculatorTest {
         calculator.compute(operations);
     }
 
+    @Parameters({"", "    ", "blabla"})
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_an_exception_for_operations_not_respecting_the_add_pattern(String operations) {
+        calculator.compute(operations);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_an_exception_for_a_null_string() {
+        calculator.compute(null);
+    }
 }

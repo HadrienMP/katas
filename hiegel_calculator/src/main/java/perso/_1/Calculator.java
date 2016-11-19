@@ -6,7 +6,15 @@ import java.util.stream.Collectors;
 
 class Calculator {
     int compute(String operations) {
+        if (operations == null) {
+            throw new IllegalArgumentException();
+        }
+
         List<Integer> toAdd = getNumbersToAdd(operations);
+
+        if (toAdd.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
 
         if (toAdd.size() == 1) {
             return toAdd.get(0);
