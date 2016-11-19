@@ -5,29 +5,31 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class Calculator {
+
     int compute(String operations) {
         if (operations == null) {
             throw new IllegalArgumentException();
         }
 
-        List<Integer> toAdd = getNumbersToAdd(operations);
+        String addOperations = replaceSubstractionsByAdditions(operations);
+        List<Integer> toAdd = getNumbersToAdd(addOperations);
 
         if (toAdd.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
-        if (toAdd.size() == 1) {
-            return toAdd.get(0);
-        }
-
         return toAdd.stream().reduce(0, this::add);
-}
+    }
 
-    private List<Integer> getNumbersToAdd(String operations) {
-        return Arrays.stream(operations.split("\\+"))
+    private List<Integer> getNumbersToAdd(String addOperations) {
+        return Arrays.stream(addOperations.split("\\+"))
                 .filter(this::isANumber)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
+    }
+
+    private String replaceSubstractionsByAdditions(String operations) {
+        return operations.replace("-", "+-");
     }
 
     private boolean isANumber(String s) {

@@ -14,6 +14,10 @@ public class CalculatorTest {
 
     private Calculator calculator = new Calculator();
 
+    //--------------------------------------------------------------------------
+    // ADD
+    //--------------------------------------------------------------------------
+
     @Test
     @Parameters({
             // Two operands
@@ -46,6 +50,7 @@ public class CalculatorTest {
             "-1+" + Integer.MIN_VALUE,
             // Three operands
             "1+1+" + Integer.MAX_VALUE,
+            "-1+-1+-" + Integer.MIN_VALUE,
     })
     public void should_not_be_able_to_add_numbers_when_result_rolls_over_the_integer_max_values(String operations) {
         calculator.compute(operations);
@@ -61,4 +66,32 @@ public class CalculatorTest {
     public void should_throw_an_exception_for_a_null_string() {
         calculator.compute(null);
     }
+
+    @Test
+    public void should_return_the_number_when_it_is_alone_in_the_operations() {
+        String operations = "1";
+        int result = calculator.compute(operations);
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_an_exception_when_the_number_is_bigger_than_the_integer_max_values() {
+        String operations = Integer.MAX_VALUE + "0";
+        calculator.compute(operations);
+    }
+
+    //--------------------------------------------------------------------------
+    // SUBSTRACT
+    //--------------------------------------------------------------------------
+
+    @Test
+    @Parameters({
+        "1-1, 0",
+        "-1-1, -2",
+    })
+    public void should_be_able_to_substract(String operations, int expectedResult) {
+        int result = calculator.compute(operations);
+        assertThat(result).isEqualTo(expectedResult);
+    }
+
 }

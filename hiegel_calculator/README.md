@@ -5,7 +5,7 @@ First step
 ----------
 * [X] Create a simple String calculator with a method "int calc(String)". The method can take two numbers separated by "+", and return their sum.
 * [X] Allow the method to handle any amount of number and "+" operations
-* [ ] Allow the method to handle the "subtract" operation.
+* [X] Allow the method to handle the "subtract" operation.
 * [ ] Allow the method to handle the "multiply" operation.
 * [ ] Allow the method to compose the different kind of operation. Keep in mind the priority of the different operations.
 
