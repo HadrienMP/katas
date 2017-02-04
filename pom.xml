@@ -16,6 +16,7 @@
         <module>yahtzee</module>
         <module>mowitnow</module>
         <module>hiegel_calculator</module>
+        <module>bowling</module>
     </modules>
 
     <properties>
