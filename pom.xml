@@ -16,7 +16,9 @@
         <module>yahtzee</module>
         <module>mowitnow</module>
         <module>hiegel_calculator</module>
-        <module>bowlingGame</module>
+        <module>bowling</module>
+        <module>rpn</module>
+        <module>coffee_machine</module>
     </modules>
 
     <properties>
