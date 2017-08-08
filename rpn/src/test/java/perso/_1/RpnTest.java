@@ -1,3 +1,5 @@
+package perso._1;
+
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
