@@ -1,0 +1,1 @@
+Attempt with the successive replace technique for the kata

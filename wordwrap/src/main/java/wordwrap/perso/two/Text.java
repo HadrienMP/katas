@@ -32,24 +32,9 @@ public class Text {
     }
 
     private Optional<Integer> findSplittableSpace(int lineSize) {
-        int spaceSplitIndex = -1;
-
-        String tempContent = content;
-
-        while (containsSplitableSpace(tempContent, lineSize)) {
-
-            int indexAfterSpace = tempContent.indexOf(" ") + 1;
-
-            spaceSplitIndex += indexAfterSpace;
-
-            tempContent = tempContent.substring(indexAfterSpace);
-        }
+        int spaceSplitIndex = content.substring(0, lineSize + 1).lastIndexOf(" ");
 
         return isSpaceNotFound(spaceSplitIndex) ? Optional.empty() : Optional.of(spaceSplitIndex);
-    }
-
-    private boolean containsSplitableSpace(String tempContent, int lineSize) {
-        return tempContent.contains(" ") && tempContent.indexOf(" ") <= lineSize;
     }
 
     private boolean isSpaceNotFound(int spaceSplitIndex) {

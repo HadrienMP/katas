@@ -1,4 +1,4 @@
-package roman.numerals.perso.one;
+package roman.numerals.perso._1;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -11,7 +11,7 @@ import java.util.Collection;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
-public class NumberTest {
+public class NumberTestTest {
 
     public static Collection<Object[]> singleLetters() {
         return Arrays.asList(
