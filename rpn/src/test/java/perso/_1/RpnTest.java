@@ -1,5 +1,8 @@
+package perso._1;
+
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -34,7 +37,7 @@ public class RpnTest {
             "3 5 8 * 7, 3 " + (5 * 8) + " 7",
     })
     public void rpn(String operations, String result) throws Exception {
-        assertThat(new Rpn().execute(operations)).isEqualTo(result);
+        Assertions.assertThat(new Rpn().execute(operations)).isEqualTo(result);
     }
 
 }
