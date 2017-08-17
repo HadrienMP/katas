@@ -12,21 +12,4 @@
     <groupId>fr.hadrienmp.katas</groupId>
     <artifactId>roman_numerals</artifactId>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.pitest</groupId>
-                <artifactId>pitest-maven</artifactId>
-                <configuration>
-                    <targetClasses>
-                        <param>roman.numerals.perso*</param>
-                    </targetClasses>
-                    <targetTests>
-                        <param>roman.numerals.perso*</param>
-                    </targetTests>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
