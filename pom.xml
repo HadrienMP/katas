@@ -19,6 +19,8 @@
         <module>bowling</module>
         <module>rpn</module>
         <module>coffee_machine</module>
+        <module>gameoflife</module>
+        <module>game_of_life</module>
     </modules>
 
     <properties>
@@ -28,6 +30,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.jason-goodwin</groupId>
+            <artifactId>better-monads</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

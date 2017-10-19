@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NeighbourTest {
+public class NeighbourSpec {
 
     // TODO: 18/10/17 propriété taille jamais supérieure à 8
 
