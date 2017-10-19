@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.hadrienmp.katas</groupId>
-    <artifactId>roman_numerals</artifactId>
+    <artifactId>game_of_life</artifactId>
+
 
 </project>
