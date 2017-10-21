@@ -5,13 +5,7 @@ import junitparams.Parameters;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
@@ -24,74 +18,60 @@ public class GameOfLifeSpec {
             "---\n---",
     })
     public void a_dead_world_stays_dead(String firstGeneration) throws Exception {
-        String secondGeneration = evolve(firstGeneration);
+        String secondGeneration = new Generation(firstGeneration).evolve().print();
+
         assertThat(secondGeneration).isEqualTo(firstGeneration);
     }
 
     @Test
     public void a_world_with_a_single_cell_dies() throws Exception {
         String firstGeneration = "-*\n--";
-        String secondGeneration = evolve(firstGeneration);
+
+        String secondGeneration = new Generation(firstGeneration).evolve().print();
+
         assertThat(secondGeneration).isEqualTo("--\n--");
     }
 
     // TODO: 18/10/17 propriete ?
-//    @Test
+    @Test
     public void a_2_2_square_of_cells_lives_forever() throws Exception {
         String firstGeneration = "----" + "\n" +
                                  "-**-" + "\n" +
                                  "-**-" + "\n" +
                                  "----";
-        String secondGeneration = evolve(firstGeneration);
+
+        String secondGeneration = new Generation(firstGeneration).evolve().print();
+
         assertThat(secondGeneration).isEqualTo(firstGeneration);
     }
 
-    private String evolve(String generation) {
+    @Test
+    public void a_triangle_gives_birth_to_a_square() throws Exception {
+        String firstGeneration = "*-" + "\n" +
+                                 "**";
 
-        List<List<String>> matrix = Stream.of(generation.split("\n"))
-                .map(line -> asList(line.split("")))
-                .collect(toList());
+        String secondGeneration = new Generation(firstGeneration).evolve().print();
 
-        // TODO HMP voir pour rassembler ces deux lignes (le transform est une ligne moche)
-        Matrix<String> strings = new Matrix<>(matrix);
-//        Matrix<Cell> cells = strings.transform((value, coordinate) -> Cell.from(value));
-        // TODO HMP voir pour faire un objet new NeighbourDensity(cells) (le transform est une ligne moche)
-//        Matrix<Long> neighbourDensity = cells.transform((value, coordinate) -> neighbours(cells, coordinate));
-
-
-
-        List<List<String>> newMatrix = new ArrayList<>();
-
-        for (int y = 0; y < matrix.size(); y++) {
-            List<String> line = matrix.get(y);
-            List<String> newLine = new ArrayList<>();
-            for (int x = 0; x < line.size(); x++) {
-
-                strings.cellAt(new Coordinate(x, y))
-                        .map(cell -> "-");
-
-                String cell = line.get(x);
-
-                if ("*".equals(cell)) {
-                    newLine.add("-");
-                } else {
-                    newLine.add(cell);
-                }
-            }
-
-            newMatrix.add(newLine);
-        }
-
-        return print(newMatrix);
+        assertThat(secondGeneration).isEqualTo(
+                "**" + "\n" +
+                "**"
+        );
     }
 
-    private long neighbours(Matrix<Cell> cells, Coordinate coordinate) {
-        return cells.neighbours(coordinate).stream().filter(cell -> cell == Cell.ALIVE).count();
-    }
+    @Test
+    public void cells_living_and_dying() throws Exception {
+        String firstGeneration = "-*--" + "\n" +
+                                 "-**-" + "\n" +
+                                 "-**-" + "\n" +
+                                 "----";
 
-    private String print(List<List<String>> newLines) {
-        return newLines.stream()
-                .map(cells -> cells.stream().collect(joining()))
-                .collect(joining("\n"));
+        String secondGeneration = new Generation(firstGeneration).evolve().print();
+
+        assertThat(secondGeneration).isEqualTo(
+                        "-**-" + "\n" +
+                        "*---" + "\n" +
+                        "-**-" + "\n" +
+                        "----"
+        );
     }
 }

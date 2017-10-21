@@ -3,9 +3,9 @@ package perso._3;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 @EqualsAndHashCode
 class Coordinate {
@@ -24,8 +24,10 @@ class Coordinate {
     }
 
     // TODO: 18/10/17 peut-être pas le meilleur endroit
-    Stream<Coordinate> neighbours() {
-        return NEIGHBOURS.stream().map(this::plus);
+    List<Coordinate> neighbours() {
+        return NEIGHBOURS.stream()
+                .map(this::plus)
+                .collect(toList());
     }
 
     private Coordinate plus(Coordinate other) {
