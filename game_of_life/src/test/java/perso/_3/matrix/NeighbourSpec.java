@@ -1,8 +1,6 @@
-package perso._3;
+package perso._3.matrix;
 
 import org.junit.Test;
-import perso._3.matrix.Coordinate;
-import perso._3.matrix.Matrix;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -16,7 +14,7 @@ public class NeighbourSpec {
     @Test
     public void a_single_cell_doesnt_have_neighbours() throws Exception {
         String[][] rawMatrix = {{""}};
-        Matrix matrix = new Matrix<>(rawMatrix);
+        Matrix<String> matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(0, 0);
 
         List<String> neighbours = matrix.neighbours(element);
@@ -27,7 +25,7 @@ public class NeighbourSpec {
     @Test
     public void right_neighbour() throws Exception {
         String[][] rawMatrix = {{"a", "b"}};
-        Matrix matrix = new Matrix<>(rawMatrix);
+        Matrix<String> matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(0, 0);
 
         List<String> neighbours = matrix.neighbours(element);
@@ -38,7 +36,7 @@ public class NeighbourSpec {
     @Test
     public void left_neighbour() throws Exception {
         String[][] rawMatrix = {{"a", "b"}};
-        Matrix matrix = new Matrix(rawMatrix);
+        Matrix<String> matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(1, 0);
 
         List<String> neighbours = matrix.neighbours(element);
@@ -49,7 +47,7 @@ public class NeighbourSpec {
     @Test
     public void left_and_right_neighbour() throws Exception {
         String[][] rawMatrix = {{"a", "b", "c"}};
-        Matrix matrix = new Matrix(rawMatrix);
+        Matrix<String> matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(1, 0);
 
         List<String> neighbours = matrix.neighbours(element);
@@ -61,7 +59,7 @@ public class NeighbourSpec {
     public void top_neighbour() throws Exception {
         String[][] rawMatrix = {{"a"},
                                 {"b"}};
-        Matrix matrix = new Matrix(rawMatrix);
+        Matrix<String> matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(0, 1);
 
         List<String> neighbours = matrix.neighbours(element);
@@ -73,7 +71,7 @@ public class NeighbourSpec {
     public void bottom_neighbour() throws Exception {
         String[][] rawMatrix = {{"a"},
                                 {"b"}};
-        Matrix matrix = new Matrix(rawMatrix);
+        Matrix<String> matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(0, 0);
 
         List<String> neighbours = matrix.neighbours(element);
@@ -86,7 +84,7 @@ public class NeighbourSpec {
         String[][] rawMatrix = {{"a", "b", "c"},
                                 {"d", "e", "f"},
                                 {"g", "h", "i"}};
-        Matrix matrix = new Matrix(rawMatrix);
+        Matrix<String> matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(1, 1);
 
         List<String> neighbours = matrix.neighbours(element);
