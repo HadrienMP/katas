@@ -1,6 +1,8 @@
 package perso._3;
 
 import org.junit.Test;
+import perso._3.matrix.Coordinate;
+import perso._3.matrix.Matrix;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -14,7 +16,7 @@ public class NeighbourSpec {
     @Test
     public void a_single_cell_doesnt_have_neighbours() throws Exception {
         String[][] rawMatrix = {{""}};
-        Matrix matrix = new Matrix(rawMatrix);
+        Matrix matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(0, 0);
 
         List<String> neighbours = matrix.neighbours(element);
@@ -25,7 +27,7 @@ public class NeighbourSpec {
     @Test
     public void right_neighbour() throws Exception {
         String[][] rawMatrix = {{"a", "b"}};
-        Matrix matrix = new Matrix(rawMatrix);
+        Matrix matrix = new Matrix<>(rawMatrix);
         Coordinate element = new Coordinate(0, 0);
 
         List<String> neighbours = matrix.neighbours(element);

@@ -1,5 +1,9 @@
 package perso._3;
 
+import perso._3.matrix.Coordinate;
+import perso._3.matrix.Element;
+import perso._3.matrix.Matrix;
+
 import static perso._3.Cell.ALIVE;
 
 class Generation {
@@ -33,7 +37,8 @@ class Generation {
                 .filter(c -> c == ALIVE)
                 .count();
 
-        return new Element<>(coordinate, element.value.evolve(neighbours));
+        Cell newCell = element.value.evolve(neighbours);
+        return new Element<>(coordinate, newCell);
     }
 
     String print() {

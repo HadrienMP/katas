@@ -1,4 +1,4 @@
-package perso._3;
+package perso._3.matrix;
 
 import java.util.*;
 import java.util.function.Function;
@@ -8,27 +8,33 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-class Matrix<T> implements Cloneable, Iterable<Element<T>> {
+public class Matrix<T> implements Cloneable, Iterable<Element<T>> {
     private final List<List<T>> matrix;
 
-    static Matrix<String> from(String representation) {
+    public static Matrix<String> from(String representation) {
         return new Matrix<>(Stream.of(representation.split("\n"))
                 .map(line -> asList(line.split("")))
                 .collect(toList()));
     }
 
-    Matrix(T[][] matrix) {
+    public Matrix(T[][] matrix) {
         this(Stream.of(matrix)
                 .map(Arrays::asList)
                 .collect(toList()));
     }
 
-    Matrix(List<List<T>> matrix) {
+    private Matrix(List<List<T>> matrix) {
         this.matrix = matrix;
     }
 
-    List<T> neighbours(Coordinate coordinate) {
-        return coordinate.neighbours()
+    // ##################################
+
+    // NEIGHBOURS
+
+    // ##################################
+
+    public List<T> neighbours(Coordinate coordinate) {
+        return new Neighbours(coordinate)
                 .stream()
                 .map(this::get)
                 .filter(Optional::isPresent)
@@ -36,19 +42,13 @@ class Matrix<T> implements Cloneable, Iterable<Element<T>> {
                 .collect(toList());
     }
 
-    <N> Matrix<N> transform(Function<T, N> transformer) {
+    // ##################################
 
-        List<List<N>> matrix = this.matrix
-                .stream()
-                .map(line -> line.stream()
-                        .map(transformer)
-                        .collect(toList()))
-                .collect(toList());
+    // ACCESS
 
-        return new Matrix<>(matrix);
-    }
+    // ##################################
 
-    Optional<T> get(Coordinate coordinate) {
+    private Optional<T> get(Coordinate coordinate) {
         if (isIn(coordinate))
             return Optional.of(matrix.get(coordinate.y).get(coordinate.x));
         else
@@ -62,26 +62,56 @@ class Matrix<T> implements Cloneable, Iterable<Element<T>> {
                 && coordinate.x < matrix.get(coordinate.y).size();
     }
 
-    Matrix<T> set(Coordinate coordinate, T value) {
+    public Matrix<T> update(Element<T> element) {
         Matrix<T> matrix = clone();
         matrix.matrix
-                .get(coordinate.y)
-                .set(coordinate.x, value);
+                .get(element.coordinate.y)
+                .set(element.coordinate.x, element.value);
         return matrix;
     }
 
+    // ##################################
+
+    // TRANSFORM
+
+    // ##################################
+
     @Override
-    protected Matrix<T> clone() {
+    public Matrix<T> clone() {
         return transform(Function.identity());
     }
 
-    String print() {
+    public <N> Matrix<N> transform(Function<T, N> transformer) {
+
+        List<List<N>> matrix = this.matrix
+                .stream()
+                .map(line -> line.stream()
+                        .map(transformer)
+                        .collect(toList()))
+                .collect(toList());
+
+        return new Matrix<>(matrix);
+    }
+
+    // ##################################
+
+    // PRINT
+
+    // ##################################
+
+    public String print() {
         return matrix.stream()
                 .map(cells -> cells.stream()
                         .map(Object::toString)
                         .collect(joining()))
                 .collect(joining("\n"));
     }
+
+    // ##################################
+
+    // ITERATOR
+
+    // ##################################
 
     @Override
     public Iterator<Element<T>> iterator() {
@@ -95,13 +125,5 @@ class Matrix<T> implements Cloneable, Iterable<Element<T>> {
             }
         }
         return elements.iterator();
-    }
-
-    Matrix<T> update(Element<T> element) {
-        Matrix<T> matrix = clone();
-        matrix.matrix
-                .get(element.coordinate.y)
-                .set(element.coordinate.x, element.value);
-        return matrix;
     }
 }
