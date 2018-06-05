@@ -1,62 +1,36 @@
 package perso.woodyzuill;
 
-class GildedRose {
-    Item[] items;
+import org.jetbrains.annotations.NotNull;
+import perso.woodyzuill.aging.AgingStrategy;
 
-    public GildedRose(Item[] items) {
+import static java.util.Arrays.stream;
+
+public class GildedRose {
+    private Item[] items;
+
+    GildedRose(Item[] items) {
         this.items = items;
     }
 
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
-            } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
+        items = stream(items)
+                .map(this::age)
+                .toArray(Item[]::new);
+    }
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
+    private Item age(Item item) {
+        Item agedItem = AgingStrategy.of(item.name).age(item);
+        update(item, agedItem);
+        return item;
+    }
 
-                        if (items[i].sellIn < 6) {
-                            if (items[i].quality < 50) {
-                                items[i].quality = items[i].quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
+    private static void update(Item item, Item updated) {
+        item.quality = updated.quality;
+        item.sellIn = updated.sellIn;
+    }
 
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                items[i].sellIn = items[i].sellIn - 1;
-            }
-
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
-                        }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
-                    }
-                } else {
-                    if (items[i].quality < 50) {
-                        items[i].quality = items[i].quality + 1;
-                    }
-                }
-            }
-        }
+    @NotNull
+    public static Item clone(Item item) {
+        return new Item(item.name, item.sellIn, item.quality);
     }
 }
