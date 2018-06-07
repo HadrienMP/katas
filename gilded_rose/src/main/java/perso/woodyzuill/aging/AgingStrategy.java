@@ -10,7 +10,7 @@ public interface AgingStrategy {
     static AgingStrategy of(String itemName) {
         // TODO use some kind of open close mechanism
         if ("Sulfuras, Hand of Ragnaros".equals(itemName)) {
-            return new Sulfuras();
+            return new ForeverYoung();
         } else if ("Aged Brie".equals(itemName)) {
             return new Brie();
         } else if ("Backstage passes to a TAFKAL80ETC concert".equals(itemName)) {

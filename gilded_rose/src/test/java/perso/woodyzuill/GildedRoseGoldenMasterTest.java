@@ -28,6 +28,6 @@ public class GildedRoseGoldenMasterTest {
                 itemNames,
                 qualities,
                 sellIns
-        );
+                );
     }
 }

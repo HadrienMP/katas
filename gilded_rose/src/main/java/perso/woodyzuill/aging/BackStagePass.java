@@ -1,34 +1,34 @@
 package perso.woodyzuill.aging;
 
-import perso.woodyzuill.GildedRose;
 import perso.woodyzuill.Item;
+import perso.woodyzuill.Quality;
 
 public class BackStagePass implements AgingStrategy {
 
     @Override
     public Item age(Item item) {
-        Item updated = GildedRose.clone(item);
-        if (updated.quality < 50) {
-            updated.quality = updated.quality + 1;
+        Quality quality = updateQuality(item);
 
-            if (updated.sellIn < 11) {
-                if (updated.quality < 50) {
-                    updated.quality = updated.quality + 1;
-                }
-            }
+        int sellIn = item.sellIn - 1;
 
-            if (updated.sellIn < 6) {
-                if (updated.quality < 50) {
-                    updated.quality = updated.quality + 1;
-                }
-            }
+        if (sellIn < 0) {
+            quality = Quality.ZERO;
         }
 
-        updated.sellIn = updated.sellIn - 1;
-
-        if (updated.sellIn < 0) {
-            updated.quality = 0;
-        }
-        return updated;
+        return new Item(item.name, sellIn, quality.quality);
     }
+
+    public Quality updateQuality(Item item) {
+        Quality quality = new Quality(item.quality).increment();
+
+        if (item.sellIn <= 10) {
+            quality = quality.increment();
+        }
+
+        if (item.sellIn <= 5) {
+            quality = quality.increment();
+        }
+        return quality;
+    }
+
 }
