@@ -20,6 +20,9 @@
         <module>rpn</module>
         <module>coffee_machine</module>
         <module>game_of_life</module>
+        <module>mine-sweeper</module>
+        <module>fraction</module>
+        <module>markov-chain</module>
     </modules>
 
     <properties>
