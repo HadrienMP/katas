@@ -17,7 +17,7 @@
             <artifactId>approvaltests</artifactId>
             <scope>system</scope>
             <version>020</version>
-            <systemPath>${basedir}/../lib/ApprovalTests.jar</systemPath>
+            <systemPath>../../lib/ApprovalTests.jar</systemPath>
         </dependency>
     </dependencies>
 
