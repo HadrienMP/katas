@@ -9,20 +9,19 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>gilded_rose</module>
-        <module>fizzbuzz</module>
-        <module>wordwrap</module>
-        <module>roman_numerals</module>
-        <module>yahtzee</module>
-        <module>mowitnow</module>
-        <module>hiegel_calculator</module>
-        <module>bowling</module>
-        <module>rpn</module>
-        <module>coffee_machine</module>
-        <module>game_of_life</module>
-        <module>mine-sweeper</module>
-        <module>fraction</module>
-        <module>markov-chain</module>
+        <module>refactor/gilded_rose</module>
+        <module>classic/fizzbuzz</module>
+        <module>classic/wordwrap</module>
+        <module>classic/roman_numerals</module>
+        <module>other/yahtzee</module>
+        <module>other/hiegel_calculator</module>
+        <module>classic/bowling</module>
+        <module>classic/rpn</module>
+        <module>classic/coffee_machine</module>
+        <module>classic/game_of_life</module>
+        <module>classic/mine-sweeper</module>
+        <module>other/fraction</module>
+        <module>other/markov-chain</module>
     </modules>
 
     <properties>
@@ -35,7 +34,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>org.immutables</groupId>

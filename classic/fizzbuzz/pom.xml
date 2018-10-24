@@ -11,15 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>fr.hadrienmp.katas</groupId>
-    <artifactId>gilded_rose</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>org.approvaltests</groupId>
-            <artifactId>approvaltests</artifactId>
-            <scope>system</scope>
-            <version>020</version>
-            <systemPath>${project.basedir}/../../lib/ApprovalTests.jar</systemPath>
-        </dependency>
-    </dependencies>
+    <artifactId>fizzbuzz</artifactId>
+
 
 </project>
