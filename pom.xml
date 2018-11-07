@@ -22,6 +22,10 @@
         <module>classic/mine-sweeper</module>
         <module>other/fraction</module>
         <module>other/markov-chain</module>
+        <module>refactor/coverage-driven</module>
+        <module>socratesfr</module>
+        <module>classic/mars-rover</module>
+        <module>classic/bank</module>
     </modules>
 
     <properties>
