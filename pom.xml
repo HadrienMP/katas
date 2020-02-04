@@ -26,6 +26,7 @@
         <module>socratesfr</module>
         <module>classic/mars-rover</module>
         <module>classic/bank</module>
+        <module>mastermind</module>
     </modules>
 
     <properties>
